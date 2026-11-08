@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Yorkshire Dialect – Presentation</title>
+<style>
+:root {
+  --yorks-blue: #0B2A5B;
+  --yorks-blue-mid: #154C9E;
+  --yorks-blue-dark: #061a3a;
+  --gold: #C9A227;
+  --gold-light: #E8C766;
+  --green: #0B6B3A;
+  --ink: #1e2a3a;
+  --paper: #ffffff;
+  --tint: #f4f7fc;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  background: linear-gradient(160deg, #0a1f44 0%, #0B2A5B 60%, #061a3a 100%);
+  color: var(--ink);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 30px;
+}
+
+.slides-container {
+  width: min(96vw, 1280px);
+  margin: 28px auto 14px;
+  background: var(--paper);
+  border-radius: 14px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.05);
+  overflow: hidden;
+  position: relative;
+}
+
+.slide {
+  display: none;
+  width: 100%;
+  position: relative;
+  background: var(--paper);
+  min-height: 620px;
+}
+.slide.active { display: block; }
+
+/* Content slide header */
+.slide-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 44px;
+  background: linear-gradient(135deg, var(--yorks-blue) 0%, var(--yorks-blue-mid) 100%);
+  color: #fff;
+  border-bottom: 4px solid var(--gold);
+  position: relative;
+}
+.slide-header h2 {
+  margin: 0;
+  color: #fff;
+  font-size: 1.7em;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+.rose-icon { width: 44px; height: 44px; flex: 0 0 44px; display: inline-block; }
+.rose-icon svg { width: 100%; height: 100%; display: block; }
+
+.slide-num {
+  position: absolute;
+  right: 44px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.95em;
+  font-weight: 700;
+  color: var(--gold-light);
+  letter-spacing: 3px;
+}
+
+/* Body */
+.slide-body {
+  padding: 36px 52px 52px;
+  position: relative;
+}
+.slide::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 6px;
+  background: linear-gradient(90deg, var(--yorks-blue) 0%, var(--gold) 40%, var(--green) 70%, var(--yorks-blue-mid) 100%);
+}
+
+/* Lists */
+ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  width: 100%;
+}
+ul li {
+  position: relative;
+  padding-left: 36px;
+  margin-bottom: 16px;
+  font-size: 1.13em;
+  line-height: 1.6;
+  color: var(--ink);
+}
+ul li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0.55em;
+  width: 13px; height: 13px;
+  background: var(--gold);
+  border: 2px solid var(--yorks-blue);
+  border-radius: 2px;
+  transform: rotate(45deg);
+}
+ul li strong { color: var(--yorks-blue); }
+ul li em { color: var(--green); font-style: italic; }
+
+/* Title slide */
+.title-slide {
+  background: radial-gradient(circle at 30% 25%, #1a4d9e 0%, var(--yorks-blue) 55%, var(--yorks-blue-dark) 100%);
+  color: #fff;
+  padding: 70px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  min-height: 620px;
+}
+.title-slide .big-rose {
+  position: absolute;
+  right: -70px;
+  top: -70px;
+  width: 380px;
+  height: 380px;
+  opacity: 0.14;
+  pointer-events: none;
+}
+.title-slide .center-rose {
+  width: 96px;
+  height: 96px;
+  margin-bottom: 26px;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 6px 18px rgba(0,0,0,0.35));
+}
+.title-slide h1 {
+  font-size: 2.9em;
+  color: #fff;
+  border: none;
+  padding: 0;
+  margin: 0 0 14px;
+  letter-spacing: 0.4px;
+  text-shadow: 0 3px 16px rgba(0,0,0,0.4);
+  position: relative;
+  z-index: 1;
+  line-height: 1.15;
+}
+.title-slide .subtitle {
+  font-size: 1.4em;
+  color: var(--gold-light);
+  margin: 0 0 34px;
+  font-weight: 500;
+  position: relative;
+  z-index: 1;
+}
+.title-slide .divider {
+  width: 160px;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, var(--gold-light), #fff, var(--gold-light), transparent);
+  border-radius: 2px;
+  margin-bottom: 34px;
+  position: relative;
+  z-index: 1;
+}
+.title-slide .author-info {
+  font-size: 1.1em;
+  line-height: 1.8;
+  color: #dfe8f5;
+  position: relative;
+  z-index: 1;
+}
+.title-slide .author-info p { margin: 6px 0; }
+.title-slide .author-info strong { color: #fff; }
+
+/* Audio links */
+.audio-links { list-style: none; padding-left: 0; }
+.audio-links li {
+  background: var(--tint);
+  border-left: 5px solid var(--gold);
+  border-radius: 8px;
+  padding: 14px 20px 14px 22px;
+  margin-bottom: 14px;
+  font-size: 1.05em;
+  line-height: 1.55;
+  color: var(--ink);
+}
+.audio-links li::before { display: none; }
+.audio-links a {
+  color: var(--yorks-blue);
+  font-weight: 700;
+  text-decoration: none;
+}
+.audio-links a:hover { text-decoration: underline; }
+.audio-note {
+  font-size: 0.95em;
+  color: #5a6b82;
+  margin-top: 18px;
+  font-style: italic;
+}
+
+/* Navigation */
+.navigation {
+  display: flex;
+  gap: 16px;
+  margin: 0 0 20px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+button {
+  padding: 12px 28px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 8px;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--yorks-blue-mid), var(--yorks-blue));
+  color: #fff;
+  transition: transform 0.15s, box-shadow 0.2s, background 0.2s;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.4);
+}
+button:disabled {
+  background: #4a5568;
+  cursor: not-allowed;
+  opacity: 0.6;
+  box-shadow: none;
+}
+button.download-btn {
+  background: linear-gradient(135deg, #15803d, #0B6B3A);
+}
+button.download-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #16a34a, #15803d);
+}
+.download-status {
+  font-size: 14px;
+  color: var(--gold-light);
+  font-weight: 600;
+}
+.capturing .navigation,
+.capturing .download-status { display: none !important; }
+
+/* Responsive */
+@media (max-width: 800px) {
+  .slide-header { padding: 16px 22px; }
+  .slide-header h2 { font-size: 1.35em; }
+  .slide-num { right: 22px; font-size: 0.85em; }
+  .rose-icon { width: 34px; height: 34px; flex: 0 0 34px; }
+  .slide-body { padding: 26px 26px 42px; }
+  ul li { font-size: 1em; padding-left: 30px; }
+  .title-slide { padding: 50px 30px; }
+  .title-slide h1 { font-size: 2.1em; }
+  .title-slide .subtitle { font-size: 1.15em; }
+  .title-slide .center-rose { width: 72px; height: 72px; }
+  .title-slide .big-rose { width: 260px; height: 260px; right: -70px; top: -70px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Reusable rose SVG cloned into place by JS -->
+<div id="rose-source" style="display:none">
+  <svg viewBox="-50 -50 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g fill="#ffffff" stroke="#c9d4e8" stroke-width="1.2">
+      <ellipse cx="0" cy="-22" rx="14" ry="20"/>
+      <ellipse cx="0" cy="-22" rx="14" ry="20" transform="rotate(72)"/>
+      <ellipse cx="0" cy="-22" rx="14" ry="20" transform="rotate(144)"/>
+      <ellipse cx="0" cy="-22" rx="14" ry="20" transform="rotate(216)"/>
+      <ellipse cx="0" cy="-22" rx="14" ry="20" transform="rotate(288)"/>
+    </g>
+    <g fill="#0B6B3A">
+      <path d="M0,42 L6,50 L0,58 L-6,50 Z"/>
+      <path d="M0,42 L6,50 L0,58 L-6,50 Z" transform="rotate(72)"/>
+      <path d="M0,42 L6,50 L0,58 L-6,50 Z" transform="rotate(144)"/>
+      <path d="M0,42 L6,50 L0,58 L-6,50 Z" transform="rotate(216)"/>
+      <path d="M0,42 L6,50 L0,58 L-6,50 Z" transform="rotate(288)"/>
+    </g>
+    <circle cx="0" cy="0" r="9" fill="#D4AF37"/>
+    <circle cx="0" cy="0" r="5" fill="#F2D06B"/>
+  </svg>
+</div>
+
+<div class="slides-container">
+
+  <!-- Slide 1: Title -->
+  <div class="slide title-slide active">
+    <span class="big-rose" data-rose></span>
+    <span class="center-rose" data-rose></span>
+    <h1>The Yorkshire Dialect of English</h1>
+    <p class="subtitle">A Linguistic and Cultural Overview</p>
+    <div class="divider"></div>
+    <div class="author-info">
+      <p><strong>Prepared by:</strong> Bryskin Nikita Mikhailovich</p>
+      <p><strong>4th-year Bachelor’s student, Group ZAR-231</strong></p>
+    </div>
+  </div>
+
+  <!-- Slide 2 -->
+  <div class="slide">
+    <header class="slide-header">
+      <span class="rose-icon" data-rose></span>
+      <h2>Introduction</h2>
+      <span class="slide-num">02</span>
+    </header>
+    <div class="slide-body">
+      <ul>
+        <li>Yorkshire dialect is also known as <strong>Broad Yorkshire</strong> or <strong>Tyke</strong>.</li>
+        <li>Yorkshire is the largest county in England.</li>
+        <li>Its roots lie in <strong>Old English</strong> and <strong>Old Norse</strong>.</li>
+        <li>The dialect has a distinctive identity, celebrated on <strong>Yorkshire Day</strong> (1 August).</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Slide 3 -->
+  <div class="slide">
+    <header class="slide-header">
+      <span class="rose-icon" data-rose></span>
+      <h2>Historical Influences</h2>
+      <span class="slide-num">03</span>
+    </header>
+    <div class="slide-body">
+      <ul>
+        <li><strong>Celtic substrate:</strong> river names (Calder, Nidd), <em>brock</em> (badger).</li>
+        <li><strong>Anglo-Saxon settlement (5th c.):</strong> Angles in the north (Northumbria), Saxons in the south (Mercia).</li>
+        <li><strong>Viking influence (9th c.):</strong> <em>dale</em>, <em>sam</em>, many place names.</li>
+        <li><strong>Norman French:</strong> minor impact (<em>urchin</em>, <em>buffit</em>, <em>fent</em>).</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Slide 4 -->
+  <div class="slide">
+    <header class="slide-header">
+      <span class="rose-icon" data-rose></span>
+      <h2>The Great Dialect Divide</h2>
+      <span class="slide-num">04</span>
+    </header>
+    <div class="slide-body">
+      <ul>
+        <li>Two main zones: <strong>Mercian</strong> (south-west) vs <strong>Northumbrian</strong> (north-east).</li>
+        <li>Boundary roughly along the <strong>River Wharfe</strong>.</li>
+        <li>First noted by <strong>A. J. Ellis</strong>; confirmed by <strong>Joseph Wright</strong>.</li>
+        <li>Village-level mapping by Stodd (1906), Sheard (1945), Rohrer (1950).</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Slide 5 -->
+  <div class="slide">
+    <header class="slide-header">
+      <span class="rose-icon" data-rose></span>
+      <h2>Distribution and Sub-regions</h2>
+      <span class="slide-num">05</span>
+    </header>
+    <div class="slide-body">
+      <ul>
+        <li>Historical ridings: <strong>North, East, West</strong> (and South Yorkshire).</li>
+        <li>West Riding: harsher sound (industrial past); North/East: softer (rural).</li>
+        <li><strong>Trudgill (1990):</strong> North/East in Northern group; South in Southern group.</li>
+        <li>Local distinctiveness: Hull/East Yorkshire accent; Middlesbrough similar to Geordie.</li>
+        <li>Sheard (1945) predicted standardisation of West Riding dialect; not fully realised.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Slide 6 -->
+  <div class="slide">
+    <header class="slide-header">
+      <span class="rose-icon" data-rose></span>
+      <h2>Phonetic Features</h2>
+      <span class="slide-num">06</span>
+    </header>
+    <div class="slide-body">
+      <ul>
+        <li>Short /a/ in <em>bath</em>, <em>dance</em>.</li>
+        <li>Monophthongs in <em>house</em> → <em>hoos</em>, <em>out</em> → <em>oot</em>.</li>
+        <li><em>lang</em>, <em>wrang</em>, <em>strang</em>; <em>finnd</em>, <em>blinnd</em>.</li>
+        <li><em>hee-am</em> (home), <em>stee-an</em> (stone).</li>
+        <li><em>-in'</em> for <em>-ing</em>; h-dropping; glottal stop.</li>
+        <li>East Yorkshire: partial rhoticity.</li>
+        <li>West Riding: devoicing (<em>red tin</em> → <em>ret tin</em>).</li>
+        <li>Regional variants: <em>father</em> (fatther vs feyther/faather), <em>about</em> (abaht vs aboot).</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Slide 7 -->
+  <div class="slide">
+    <header class="slide-header">
+      <span class="rose-icon" data-rose></span>
+      <h2>Lexical Features</h2>
+      <span class="slide-num">07</span>
+    </header>
+    <div class="slide-body">
+      <ul>
+        <li><em>owt</em> / <em>nowt</em> – something / nothing.</li>
+        <li><em>'appen</em> – perhaps.</li>
+        <li><em>'eee by gum</em> – exclamation.</li>
+        <li><em>nah then</em> / <em>eh up</em> – hello.</li>
+        <li><em>middlin'</em> – okay; <em>nobbut middlin'</em> – not great.</li>
+        <li><em>snicket</em> – alleyway; <em>sup</em> – drink; <em>mardy</em> – moody; <em>ickle</em> – little.</li>
+        <li><em>sam</em> – gather (cf. German <em>sammeln</em>).</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Slide 8 -->
+  <div class="slide">
+    <header class="slide-header">
+      <span class="rose-icon" data-rose></span>
+      <h2>Grammatical Features</h2>
+      <span class="slide-num">08</span>
+    </header>
+    <div class="slide-body">
+      <ul>
+        <li>Definite article reduction: <em>t'</em> (<em>ont bus</em>).</li>
+        <li><em>nor</em> instead of <em>than</em> (<em>better nor her</em>).</li>
+        <li>No plural for units of measurement (<em>ten mile</em>).</li>
+        <li><em>us</em> for <em>my/our</em> (<em>us house</em>).</li>
+        <li><em>were</em> for <em>was</em> (<em>I were</em>).</li>
+        <li><em>while</em> for <em>until</em>.</li>
+        <li>Double negatives allowed (<em>I don't want nothing</em>).</li>
+        <li><em>right</em> for <em>very</em> (<em>right handsome</em>).</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Slide 9: Audio -->
+  <div class="slide">
+    <header class="slide-header">
+      <span class="rose-icon" data-rose></span>
+      <h2>Audio Examples: Listening to Yorkshire Speech</h2>
+      <span class="slide-num">09</span>
+    </header>
+    <div class="slide-body">
+      <ul class="audio-links">
+        <li>
+          <a href="https://www.yorkshiredialectsociety.org.uk/yorkshire-dialect/listen/" target="_blank" rel="noopener noreferrer">
+            Yorkshire Dialect Society – Listen to Yorkshire Dialect
+          </a><br>
+          Audio samples from the West, North, and East Ridings, read by authentic Yorkshire voices.
+        </li>
+        <li>
+          <a href="https://en.wikipedia.org/wiki/File:Damien_hirst_bbc_radio4_desert_island_discs_13_05_2013_b01sd0hy.flac" target="_blank" rel="noopener noreferrer">
+            Damien Hirst – BBC Radio 4 Desert Island Discs (2013)
+          </a><br>
+          A 31-second FLAC audio excerpt of the Yorkshire-born artist.
+        </li>
+        <li>
+          <a href="https://en.wikipedia.org/wiki/File:David_hockney_front_row_b01460l8.flac" target="_blank" rel="noopener noreferrer">
+            David Hockney – BBC Radio 4 Front Row
+          </a><br>
+          A FLAC audio excerpt of the Yorkshire-born artist.
+        </li>
+        <li>
+          <a href="https://en.wikipedia.org/wiki/File:Lord_Prescott_BBC_Radio4_Desert_Island_Discs_19_Feb_2012_b01c6trm.flac" target="_blank" rel="noopener noreferrer">
+            Lord Prescott – BBC Radio 4 Desert Island Discs (2012)
+          </a><br>
+          A FLAC audio excerpt of the Yorkshire-born politician.
+        </li>
+      </ul>
+      <p class="audio-note">
+        Note: some Wikipedia files are in FLAC format and may require a compatible browser or media player.
+      </p>
+    </div>
+  </div>
+
+  <!-- Slide 10 -->
+  <div class="slide">
+    <header class="slide-header">
+      <span class="rose-icon" data-rose></span>
+      <h2>Modern Status and Preservation</h2>
+      <span class="slide-num">10</span>
+    </header>
+    <div class="slide-body">
+      <ul>
+        <li><strong>Yorkshire Dialect Society</strong> founded 1897 by Joseph Wright.</li>
+        <li><strong>Survey of English Dialects</strong> (Orton, 1950s–60s).</li>
+        <li>Publications: <em>A White Rose Garland</em>, <em>Transactions</em>, etc.</li>
+        <li>Dialect still used but changing under standard English influence.</li>
+        <li>Yorkshire Day celebrations keep heritage alive.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Slide 11 -->
+  <div class="slide">
+    <header class="slide-header">
+      <span class="rose-icon" data-rose></span>
+      <h2>Conclusion</h2>
+      <span class="slide-num">11</span>
+    </header>
+    <div class="slide-body">
+      <ul>
+        <li>Unique blend of Celtic, Anglo-Saxon, Viking, and Norman influences.</li>
+        <li>Rich phonological, lexical, and grammatical heritage.</li>
+        <li>Alive and evolving, a symbol of regional pride.</li>
+        <li>Deserves recognition and preservation.</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<div class="navigation">
+  <button id="prevBtn" disabled>← Previous</button>
+  <button id="nextBtn">Next →</button>
+  <button id="downloadBtn" class="download-btn">⬇ Download PDF</button>
+  <span id="downloadStatus" class="download-status"></span>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+  // Clone the reusable rose SVG into every [data-rose] placeholder
+  (function () {
+    const src = document.getElementById('rose-source').innerHTML.trim();
+    document.querySelectorAll('[data-rose]').forEach(el => { el.innerHTML = src; });
+  })();
+
+  const slides = document.querySelectorAll('.slide');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const downloadBtn = document.getElementById('downloadBtn');
+  const downloadStatus = document.getElementById('downloadStatus');
+  let currentSlide = 0;
+
+  function showSlide(index) {
+    slides.forEach((s, i) => s.classList.toggle('active', i === index));
+    currentSlide = index;
+    prevBtn.disabled = currentSlide === 0;
+    nextBtn.disabled = currentSlide === slides.length - 1;
+  }
+
+  prevBtn.addEventListener('click', () => { if (currentSlide > 0) showSlide(currentSlide - 1); });
+  nextBtn.addEventListener('click', () => { if (currentSlide < slides.length - 1) showSlide(currentSlide + 1); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft' && currentSlide > 0) showSlide(currentSlide - 1);
+    if (e.key === 'ArrowRight' && currentSlide < slides.length - 1) showSlide(currentSlide + 1);
+  });
+
+  downloadBtn.addEventListener('click', async () => {
+    const originalSlide = currentSlide;
+    const total = slides.length;
+    downloadBtn.disabled = true;
+    prevBtn.disabled = true;
+    nextBtn.disabled = true;
+    downloadStatus.textContent = 'Generating PDF… 0%';
+    document.body.classList.add('capturing');
+
+    const { jsPDF } = window.jspdf;
+    const scale = 2;
+    let pdf = null;
+
+    for (let i = 0; i < total; i++) {
+      slides.forEach((s, idx) => s.classList.toggle('active', idx === i));
+      await new Promise(r => setTimeout(r, 180));
+
+      const el = slides[i];
+      const canvas = await html2canvas(el, {
+        scale: scale,
+        useCORS: true,
+        logging: false,
+        backgroundColor: '#ffffff',
+        width: el.offsetWidth,
+        height: el.offsetHeight,
+        windowWidth: document.documentElement.clientWidth,
+        windowHeight: document.documentElement.clientHeight
+      });
+
+      const imgData = canvas.toDataURL('image/jpeg', 0.95);
+      const pageW = canvas.width / scale;
+      const pageH = canvas.height / scale;
+      const orientation = pageW >= pageH ? 'landscape' : 'portrait';
+
+      if (!pdf) {
+        pdf = new jsPDF({ orientation, unit: 'px', format: [pageW, pageH] });
+      } else {
+        pdf.addPage([pageW, pageH], orientation);
+      }
+      pdf.addImage(imgData, 'JPEG', 0, 0, pageW, pageH);
+
+      const percent = Math.round(((i + 1) / total) * 100);
+      downloadStatus.textContent = `Generating PDF… ${percent}%`;
+    }
+
+    document.body.classList.remove('capturing');
+    showSlide(originalSlide);
+    downloadBtn.disabled = false;
+    downloadStatus.textContent = 'Saving…';
+    pdf.save('Yorkshire_Dialect_Presentation.pdf');
+    setTimeout(() => { downloadStatus.textContent = ''; }, 2000);
+  });
+
+  showSlide(0);
+</script>
+
+</body>
+</html>
